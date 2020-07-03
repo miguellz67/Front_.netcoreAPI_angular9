@@ -3,6 +3,10 @@
         {
             "name": "feature/criacaoModelsEServices",
             "base": "develop"
+        },
+        {
+            "name": "feature/cricaoEstoqueComponent",
+            "base": "develop"
         }
     ]
 }
