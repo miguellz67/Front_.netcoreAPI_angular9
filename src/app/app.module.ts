@@ -5,6 +5,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FormsModule } from '@angular/forms';
 
 import { NavComponent } from './nav/nav.component';
 import { EstoqueComponent } from './estoque/estoque.component';
@@ -14,14 +18,18 @@ import { EstoqueComponent } from './estoque/estoque.component';
    declarations: [
       AppComponent,
       NavComponent,
-      EstoqueComponent
+      EstoqueComponent,
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       BrowserAnimationsModule,
       HttpClientModule,
-      Ng2SearchPipeModule
+      Ng2SearchPipeModule,
+      ReactiveFormsModule,
+      TooltipModule.forRoot(),
+      BsDropdownModule.forRoot(),
+      FormsModule
    ],
    providers: [],
    bootstrap: [
