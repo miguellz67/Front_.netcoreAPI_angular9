@@ -6,12 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NavComponent } from './nav/nav.component';
+import { EstoqueComponent } from './estoque/estoque.component';
 
 
 @NgModule({
    declarations: [
       AppComponent,
-      NavComponent
+      NavComponent,
+      EstoqueComponent
    ],
    imports: [
       BrowserModule,
