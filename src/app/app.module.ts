@@ -8,6 +8,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 
 import { NavComponent } from './nav/nav.component';
@@ -29,7 +30,8 @@ import { EstoqueComponent } from './estoque/estoque.component';
       ReactiveFormsModule,
       TooltipModule.forRoot(),
       BsDropdownModule.forRoot(),
-      FormsModule
+      FormsModule,
+      ModalModule.forRoot()
    ],
    providers: [],
    bootstrap: [
