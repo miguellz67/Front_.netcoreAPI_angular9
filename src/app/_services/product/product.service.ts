@@ -28,10 +28,10 @@ constructor( private http: HttpClient ) { }
     return this.http.post(this.baseURL, product);
   }
 
-  postUpload(file: File){
+  postUpload(file: File, id: string){
     const fileToUp = file[0] as File;
     const formData = new FormData();
-    formData.append('file', fileToUp, fileToUp.name);
+    formData.append('file', fileToUp, id + '_' + fileToUp.name);
 
     return this.http.post(`${this.baseURL}/imageUp`, formData);
   }
