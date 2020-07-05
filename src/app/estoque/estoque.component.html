@@ -2,40 +2,48 @@
 <div class="container p-2">
   <h3 class="font-weight-light mb-4">Gerenciamento</h3>
 
-  <button class="btn btn-sm btn-danger mr-2" (click)="openModal(modcat)">Categoria +</button>
-  <button class="btn btn-sm btn-danger" (click)="openModal(template)">Produto +</button>
-  <div class="form-inline">
-    <div class="form-group">
-      <input type="text" class="form-control border-secondary form-control-sm mt-2 p-3" placeholder="Buscar" [(ngModel)]='listFilter'>
-    </div>
-  </div>
+  <button class="btn btn-sm btn-danger mr-2" (click)="openModal(modcat, registerCat)">Categoria +</button>
+  <button class="btn btn-sm btn-danger" (click)="openModal(template, registerForm)">Produto +</button>
+  
 
-  <div class="table-responsive mt-3">
-    <table class="table table-light table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Categoria</th>
-          <th scope="col">Marca</th>
-          <th scope="col">Modelo</th>
-          <th scope="col">Preço</th>
-          <th scope="col">Opcões</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="products && products.length">
-        <tr *ngFor="let product of products | filter: listFilter">
-          <td>#</td>
-          <td>{{product.categoryName}}</td>
-          <td>{{product.brand}}</td>
-          <td>{{product.model}}</td>
-          <td>{{product.price}}</td>
-          <td>
-            <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="openModal(template)"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-sm btn-danger"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="row mt-5">
+    <div class="w-75">
+      <h4 class="text-center font-weight-light">Produtos</h4>
+      <div class="table-responsive mt-3">
+        <table class="table table-light table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"> 
+                <div class="form-inline">
+                  <div class="form-group">
+                    <input type="text" class="form-control border-secondary form-control-sm" placeholder="Filtrar" [(ngModel)]='listFilter'>
+                  </div>
+                </div>
+              </th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Opcões</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="products && products.length">
+            <tr *ngFor="let product of products | filter: listFilter">
+              <td>#</td>
+              <td>{{product.categoryName}}</td>
+              <td>{{product.brand}}</td>
+              <td>{{product.model}}</td>
+              <td>{{product.price}}</td>
+              <td><img src="{{urlImg}}{{product.image}}" width="50%" alt="Imagem {{product.model}}"></td>
+              <td>
+                <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="openModal(template)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -45,7 +53,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title pull-left font-weight-light">Produtos</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="template.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal(template, registerForm)">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -90,15 +98,31 @@
           
           <div class="form-group">
             <label for="inputDescription">Descrição</label>
-            <textarea id="inputDescription" class="form-control" cols="30" rows="3" formControlName="desc" [ngClass]="{'is-invalid': registerForm.get('desc').errors && registerForm.get('desc').touched}"></textarea>
-            <div *ngIf="registerForm.get('desc').hasError('required')" class="invalid-feedback">
+            <textarea id="inputDescription" class="form-control" cols="30" rows="3" formControlName="description" [ngClass]="{'is-invalid': registerForm.get('description').errors && registerForm.get('description').touched}"></textarea>
+            <div *ngIf="registerForm.get('description').hasError('required')" class="invalid-feedback">
               Campo obrigatório
             </div>
-            <div *ngIf="registerForm.get('desc').hasError('minlength')" class="invalid-feedback">
+            <div *ngIf="registerForm.get('description').hasError('minlength')" class="invalid-feedback">
               Mínimo de 15 caracteres
             </div>
           </div>
           <div class="form-row">
+            <input type="hidden" formControlName="id">
+            <div class="form-group col-md-2">
+              <label for="inputPrice">Imagem</label>
+              <table>
+                <tr>
+                  <td>
+                    <button class="btn btn-danger" (click)="file.click()">Inserir</button>
+                    <input type="file" #file id="inputImage" class="d-none" accept="image/*" (change)="onFileChange($event)" formControlName="image" [ngClass]="{'is-invalid': registerForm.get('image').errors && registerForm.get('image').touched}">
+                  </td>
+                </tr>
+              </table>
+              <div *ngIf="registerForm.get('image').hasError('required')" class="invalid-feedback">
+                Campo obrigatório
+              </div>
+            </div>
+
             <div class="form-group col-md-2">
               <label for="inputPrice">Preço</label>
               <input type="number" class="form-control" id="inputPrice" formControlName="price" [ngClass]="{'is-invalid': registerForm.get('price').errors && registerForm.get('price').touched}">
@@ -112,10 +136,10 @@
 
             <div class="form-group col-md-3">
               <label for="inputState">Categoria</label>
-              <select id="inputState" class="form-control" formControlName="category" [ngClass]="{'is-invalid': registerForm.get('category').errors && registerForm.get('category').touched}">
-                <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+              <select id="inputState" class="form-control" formControlName="categoryId" [ngClass]="{'is-invalid': registerForm.get('categoryId').errors && registerForm.get('categoryId').touched}">
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
               </select>
-              <div *ngIf="registerForm.get('category').hasError('required')" class="invalid-feedback">
+              <div *ngIf="registerForm.get('categoryId').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
             </div>
@@ -133,11 +157,11 @@
 
           </div>
           <button class="btn btn-sm btn-dark mr-1" tooltip="Cancelar"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-          <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid" (click)="saveChanges()" tooltip="Inserir"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid" (click)="saveChangesP(template)" tooltip="Inserir"><i class="fa fa-plus" aria-hidden="true"></i></button>
         </form>
       </div>
       <div class="modal-footer">
-
+        <p>form: {{registerForm.value| json}}</p>
       </div>
     </div>
   </div>
@@ -150,14 +174,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title pull-left font-weight-light">Categoria</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modcat.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal(modcat, registerCat)">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-4">
         <form [formGroup]="registerCat">
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group">
               <label for="inputName">Nome</label>
               <input type="text" class="form-control" id="inputName" formControlName="name" [ngClass]="{'is-invalid': registerCat.get('name').errors && registerCat.get('name').touched}">
               <div *ngIf="registerCat.get('name').hasError('required')" class="invalid-feedback">
@@ -167,10 +191,12 @@
                 Mínimo de 5 caracteres
               </div>
             </div>
+            <input type="hidden" formControlName="id">
           </div>
         </form>
       </div>
       <div class="model-footer">
+        <button class="btn btn-sm btn-danger" [disabled]="!registerCat.valid" (click)="saveChangesC(modcat)"><i class="fa fa-plus" aria-hidden="true"></i></button>
         <p>Form valide:{{registerCat.valid}}</p>
         <p>Values: {{registerCat.value | json}}</p>
       </div>
