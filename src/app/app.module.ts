@@ -11,7 +11,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 
-import { NavComponent } from './nav/nav.component';
 import { EstoqueComponent } from './estoque/estoque.component';
 
 
