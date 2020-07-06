@@ -24,6 +24,7 @@
               <th scope="col">Marca</th>
               <th scope="col">Modelo</th>
               <th scope="col">Preço</th>
+              <th scope="col">Imagem</th>
               <th scope="col">Opcões</th>
             </tr>
           </thead>
@@ -36,7 +37,7 @@
               <td>{{product.price}}</td>
               <td><img src="{{urlImg}}{{product.image}}" width="50%" alt="Imagem {{product.model}}"></td>
               <td>
-                <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="openModal(template)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-sm btn-dark" tooltip="Editar" (click)="openModal(template)"><i class="fa fa-edit"></i></button>
                 <button class="btn btn-sm btn-danger"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
               </td>
             </tr>
