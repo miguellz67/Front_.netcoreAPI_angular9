@@ -2,7 +2,8 @@
 
     <div class="row text-center">
 
-        <div *ngFor="let product of products" class="col-md-4" style="padding-bottom: 30px;">
+        <div *ngFor="let product of products | paginate: { itemsPerPage: 3, currentPage: paginaAtual }; let i = index"
+            class="col-md-4" style="padding-bottom: 30px;">
 
             <div class="card h-100">
                 <a class="text-decoration-none">
@@ -67,8 +68,8 @@
                         </div>
                         <div>
                             <h5>Descrição</h5>
-                                <p class="card-text">{{ product.description }}</p>
-                                <br>
+                            <p class="card-text">{{ product.description }}</p>
+                            <br>
                         </div>
                     </div>
                     <button type="button" class="btn btn-danger" aria-label="Close" (click)="modalRef.hide()">
@@ -79,4 +80,8 @@
 
         </div>
     </div>
+</div>
+<div class="pagination justify-content-center pagination-large">
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+    </pagination-controls>
 </div>

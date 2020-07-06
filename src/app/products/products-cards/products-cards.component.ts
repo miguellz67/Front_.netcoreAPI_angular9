@@ -9,6 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './products-cards.component.html'
 })
 export class ProductsCardsComponent implements OnInit {
+  public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
 
   modalRef: BsModalRef;
 
