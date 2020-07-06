@@ -19,6 +19,8 @@ export class ProductsCardsComponent implements OnInit {
   product: Product;
   categories: Category[];
   category: Category;
+  public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
+
   modalRef: BsModalRef;
   _listFilter: string;
 
@@ -28,8 +30,6 @@ export class ProductsCardsComponent implements OnInit {
    set listFilter(value: string){
      this._listFilter = value;
    }
-
-  public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
 
   constructor(private productService: ProductService,
     private modalService: BsModalService,
