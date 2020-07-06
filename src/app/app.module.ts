@@ -22,6 +22,8 @@ import { NavComponent } from './nav/nav.component';
 import { ProductsCardsComponent } from './products/products-cards/products-cards.component';
 import { HomeComponent } from './home/home.component';
 
+import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência de paginação
+
 
 @NgModule({
    declarations: [
@@ -34,6 +36,7 @@ import { HomeComponent } from './home/home.component';
    imports: [
       BrowserModule,
       ModalModule.forRoot(),
+      NgxPaginationModule, // Nosso módulo recém instalado
       AppRoutingModule,
       BrowserAnimationsModule,
       HttpClientModule,
