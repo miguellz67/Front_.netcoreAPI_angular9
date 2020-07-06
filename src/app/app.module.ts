@@ -8,20 +8,32 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 
-import { NavComponent } from './nav/nav.component';
 import { EstoqueComponent } from './estoque/estoque.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
+
+import { NavComponent } from './nav/nav.component';
+import { ProductsCardsComponent } from './products/products-cards/products-cards.component';
+import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       EstoqueComponent,
+      ProductsCardsComponent,
+      HomeComponent
    ],
    imports: [
       BrowserModule,
+      ModalModule.forRoot(),
       AppRoutingModule,
       BrowserAnimationsModule,
       HttpClientModule,
