@@ -18,14 +18,12 @@ import { EstoqueComponent } from './estoque/estoque.component';
 @NgModule({
    declarations: [
       AppComponent,
-      NavComponent,
       EstoqueComponent,
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       BrowserAnimationsModule,
-      HttpClientModule,
       Ng2SearchPipeModule,
       ReactiveFormsModule,
       TooltipModule.forRoot(),
