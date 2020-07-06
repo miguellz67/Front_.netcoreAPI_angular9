@@ -24,6 +24,8 @@ import { HomeComponent } from './home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência de paginação
 
 
+import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência de paginação
+
 
 @NgModule({
    declarations: [
