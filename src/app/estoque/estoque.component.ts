@@ -79,7 +79,7 @@ export class EstoqueComponent implements OnInit {
   saveChangesP(template){
     if (this.registerForm.valid){
       this.product = Object.assign({}, this.registerForm.value);
-      let imgId = Guid.create().toString();
+      const imgId = Guid.create().toString();
 
       this.productService.postUpload(this.file, imgId).subscribe();
       this.product.image = imgId + '_' + this.imagemName;
