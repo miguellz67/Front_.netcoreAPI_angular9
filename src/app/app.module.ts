@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -10,18 +11,20 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 
+import { NavComponent } from './nav/nav.component';
 import { EstoqueComponent } from './estoque/estoque.component';
-
 
 @NgModule({
    declarations: [
       AppComponent,
+      NavComponent,
       EstoqueComponent,
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       BrowserAnimationsModule,
+      HttpClientModule,
       Ng2SearchPipeModule,
       ReactiveFormsModule,
       TooltipModule.forRoot(),
