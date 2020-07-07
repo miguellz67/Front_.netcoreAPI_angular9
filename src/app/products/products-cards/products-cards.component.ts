@@ -6,7 +6,6 @@ import { ProductService } from 'src/app/_services/product/product.service';
 import { CategoryService } from 'src/app/_services/category/category.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-
 @Component({
   selector: 'app-products-cards',
   templateUrl: './products-cards.component.html',
@@ -23,18 +22,25 @@ export class ProductsCardsComponent implements OnInit {
 
   modalRef: BsModalRef;
   _listFilter: string;
+  _paginas: number = 3;
 
-  get listFilter(){
+  get listFilter() {
     return this._listFilter;
-   }
-   set listFilter(value: string){
-     this._listFilter = value;
-   }
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+  }
+
+  get paginas() {
+    return this._paginas;
+  }
+  set paginas(value: number) {
+    this._paginas = value;
+  }
 
   constructor(private productService: ProductService,
     private modalService: BsModalService,
-    private categoryService: CategoryService
-    ) { }
+    private categoryService: CategoryService) { }
 
 
   ngOnInit() {
@@ -46,7 +52,7 @@ export class ProductsCardsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  getCategories(){
+  getCategories() {
     return this.categoryService.getCategories().subscribe((categories: Category[]) => {
       this.categories = categories;
       console.log(categories);
@@ -55,12 +61,12 @@ export class ProductsCardsComponent implements OnInit {
     });
   }
 
-  getProducts(){
+  getProducts() {
     return this.productService.getProducts().subscribe((products: Product[]) => {
       products.forEach((pr, ind) => {
-          this.categoryService.getCategory(pr.categoryId).subscribe((cat) => {
-         products[ind].categoryName = cat.name;
-       });
+        this.categoryService.getCategory(pr.categoryId).subscribe((cat) => {
+          products[ind].categoryName = cat.name;
+        });
       });
       this.products = products;
       console.log(products);

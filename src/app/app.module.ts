@@ -22,6 +22,7 @@ import { NavComponent } from './nav/nav.component';
 import { ProductsCardsComponent } from './products/products-cards/products-cards.component';
 import { HomeComponent } from './home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência de paginação
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
    declarations: [
@@ -32,6 +33,7 @@ import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência
       HomeComponent
    ],
    imports: [
+      AccordionModule.forRoot(),
       BrowserModule,
       ModalModule.forRoot(),
       NgxPaginationModule, // Nosso módulo recém instalado
