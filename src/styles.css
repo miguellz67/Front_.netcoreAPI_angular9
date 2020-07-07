@@ -6,3 +6,6 @@
     color: green !important;
 }
 
+thead>tr>th {
+    cursor: pointer;
+}
