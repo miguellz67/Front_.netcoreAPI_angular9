@@ -1,12 +1,12 @@
 <div class="container main-container">
-
     <div class="s010">
         <div class="antigoForm">
             <!-- Basic -->
             <div class="inner-form">
                 <div class="basic-search">
                     <div class="input-field">
-                        <input id="search" type="text" placeholder="Pesquisar" class="form-control border-secondary form-control-sm" [(ngModel)]='listFilter'>
+                        <input id="search" type="text" placeholder="Pesquisar"
+                            class="form-control border-secondary form-control-sm" [(ngModel)]='listFilter'>
                         <div class="icon-wrap">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path
@@ -16,88 +16,29 @@
                         </div>
                     </div>
                 </div>
-                <!-- Advanced -->
-                <!-- <div class="advance-search">
-                    <span class="desc">ADVANCED SEARCH</span>
-                    <div class="row">
-                        <div class="input-field">
-                            <div class="input-select">
-                                <select data-trigger="" name="choices-single-defaul">
-                                    <option placeholder="" value="">Accessories</option>
-                                    <option>Subject b</option>
-                                    <option>Subject c</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-field">
-                            <div class="input-select">
-                                <select data-trigger="" name="choices-single-defaul">
-                                    <option placeholder="" value="">Color</option>
-                                    <option>Subject b</option>
-                                    <option>Subject c</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-field">
-                            <div class="input-select">
-                                <select data-trigger="" name="choices-single-defaul">
-                                    <option placeholder="" value="">Size</option>
-                                    <option>Subject b</option>
-                                    <option>Subject c</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row second">
-                        <div class="input-field">
-                            <div class="input-select">
-                                <select data-trigger="" name="choices-single-defaul">
-                                    <option placeholder="" value="">Sale</option>
-                                    <option>Subject b</option>
-                                    <option>Subject c</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-field">
-                            <div class="input-select">
-                                <select data-trigger="" name="choices-single-defaul">
-                                    <option placeholder="" value="">Time</option>
-                                    <option>Last time</option>
-                                    <option>Today</option>
-                                    <option>This week</option>
-                                    <option>This month</option>
-                                    <option>This year</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="input-field">
-                            <div class="input-select">
-                                <select data-trigger="" name="choices-single-defaul">
-                                    <option placeholder="" value="">Type</option>
-                                    <option>Subject b</option>
-                                    <option>Subject c</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row third">
-                        <div class="input-field">
-                            <div class="result-count">
-                                <span>108 </span>results</div>
-                            <div class="group-btn">
-                                <button class="btn-delete" id="delete">RESET</button>
-                                <button class="btn-search">SEARCH</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
 
+    <accordion [isAnimated]="true" class="s010">
+        <accordion-group heading="Filtros">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <label class="font-weight-bold" for="typeConge"> Produtos por página: </label>
+                    <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
+                        <option type="number" [ngValue]="3">3</option>
+                        <option type="number" [ngValue]="6">6</option>
+                        <option type="number" [ngValue]="9">9</option>
+                        <option type="number" [ngValue]="1000">Todos</option>
+                    </select>
+                </div>
+            </div>
+        </accordion-group>
+    </accordion>
+
     <div class="row text-center">
 
-        <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: 3, currentPage: paginaAtual }; let i = index"
+        <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
             class="col-md-4" style="padding-bottom: 30px;">
 
             <div class="card h-100">
@@ -179,6 +120,9 @@
 
         </div>
     </div>
+
+
+
 </div>
 <div class="pagination justify-content-center pagination-large">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
