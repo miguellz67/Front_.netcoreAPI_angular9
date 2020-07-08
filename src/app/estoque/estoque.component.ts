@@ -1,12 +1,13 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from './../_services/product/product.service';
 import { CategoryService } from './../_services/category/category.service';
 import { Product } from './../_models/Product';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from './../_models/Category';
-import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Guid } from 'guid-typescript';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-estoque',
@@ -15,36 +16,40 @@ import { Guid } from 'guid-typescript';
 })
 export class EstoqueComponent implements OnInit {
   urlImg = 'http://localhost:5000/images/';
-  imagemName: string;
+  imageName: string;
+  imageAtt: string;
   products: Product[];
   product: Product;
   categories: Category[];
   category: Category;
   file: File;
+  p = 1;
+  // Put, Post ou Delete
+  actionMode = '';
+  // Category ou Product
+  entTarget = '';
+
+
   // tslint:disable-next-line: variable-name
-  _listFilter: string;
+  _productFilter: string;
+  categoryFilter: string;
   registerForm: FormGroup;
   registerCat: FormGroup;
+  deleteForm: FormGroup;
 
-  get listFilter(){
-   return this._listFilter;
+  get productFilter(){
+   return this._productFilter;
   }
-  set listFilter(value: string){
-    this._listFilter = value;
-  }
-
-  openModal(template: any, form?: FormGroup){
-    template.show();
-    form.setValue({id: Guid.create().toString()});
+  set productFilter(value: string){
+    this._productFilter = value;
   }
 
   constructor(
-    private http: HttpClient,
     private productService: ProductService,
     private categoryService: CategoryService,
     private fb: FormBuilder,
-    private modalService: BsModalService
-    ) { }
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.getProducts();
@@ -62,48 +67,128 @@ export class EstoqueComponent implements OnInit {
       categoryId: ['', Validators.required],
       amount: ['', [Validators.required, Validators.min(1)]],
       id: [Guid.create().toString()],
-      image: ['', Validators.required]
+      image: ['']
     });
 
     this.registerCat = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       id: [Guid.create().toString()]
     });
+
+    this.deleteForm = this.fb.group({
+      name: [''],
+      id: ['']
+    });
   }
 
-  closeModal(modal: ModalDirective, form: FormGroup){
-    form.reset({id: Guid.create().toString()});
+  closeModal(modal: ModalDirective, form?: FormGroup){
+    if (form) { form.reset({id: Guid.create().toString()}); }
+    if (this.entTarget === 'product'){
+      this.getProducts();
+      this.getCategories();
+    }else if (this.entTarget === 'category'){
+      this.getCategories();
+      this.getProducts();
+    }
     modal.hide();
+  }
+
+  // Produtos
+
+  createProduct(modal: ModalDirective){
+    this.actionMode = 'post';
+    this.entTarget = 'product';
+    modal.show();
   }
 
   saveChangesP(template){
     if (this.registerForm.valid){
-      this.product = Object.assign({}, this.registerForm.value);
-      const imgId = Guid.create().toString();
+      if (this.actionMode === 'post'){
+          this.product = Object.assign({}, this.registerForm.value);
+          const imgId = Guid.create().toString();
 
-      this.productService.postUpload(this.file, imgId).subscribe();
-      this.product.image = imgId + '_' + this.imagemName;
+          this.productService.postUpload(this.file, imgId).subscribe();
 
-      this.productService.postProduct(this.product).subscribe((product: Product) => {
-        console.log(product);
-        template.hide();
-        this.getProducts();
-        this.getCategories();
+          this.product.image = imgId + '_' + this.imageName;
 
-      }, error => {
-        console.log(error.message);
-      });
+          this.productService.postProduct(this.product).subscribe((product: Product) => {
+            console.log(product);
+            this.closeModal(template, this.registerForm);
+            this.showSuccess();
+
+          }, error => {
+            console.log(error.message);
+          });
+      }else if (this.actionMode === 'put'){
+        this.product = Object.assign({}, this.registerForm.value);
+
+        const imgId = Guid.create().toString();
+
+        if (this.file){
+          this.productService.postUpload(this.file, imgId).subscribe();
+          this.product.image = imgId + '_' + this.imageName;
+          this.productService.putProduct(this.product).subscribe(() => { this.closeModal(template, this.registerForm); });
+        }else{
+          this.product.image = this.imageAtt;
+          this.productService.putProduct(this.product).subscribe(() => { this.closeModal(template, this.registerForm); });
+        }
+        this.imageAtt = '';
+        this.showSuccess();
+      }
     }
   }
 
   onFileChange(event){
-    const reader = new FileReader();
-
     if (event.target.files && event.target.files.length){
       this.file = event.target.files;
-      this.imagemName = this.file[0].name;
+      this.imageName = this.file[0].name;
+      console.log(this.imageName);
       console.log(this.file);
     }
+  }
+
+  deleteProduct(product: Product, modal?: ModalDirective){
+    this.entTarget = 'product';
+    this.actionMode = 'delete';
+    this.product = product;
+    modal.show();
+    this.deleteForm.patchValue(this.product);
+  }
+
+  deleteConfirm(template: ModalDirective){
+    if (this.entTarget === 'product'){
+      const pr = Object.assign({}, this.deleteForm.value);
+      this.productService.deleteProduct(pr.id).subscribe(() => {
+        this.showSuccess();
+        this.closeModal(template);
+      });
+    }
+    else if (this.entTarget === 'category'){
+      const ct = Object.assign({}, this.deleteForm.value);
+      this.categoryService.deleteCategory(ct.id).subscribe(() => {
+        this.showSuccess();
+        this.closeModal(template);
+      });
+    }
+  }
+
+  putProduct(modal: ModalDirective, product: Product){
+    this.actionMode = 'put';
+    this.entTarget = 'product';
+    this.product = product;
+    this.imageAtt = product.image;
+    modal.show();
+    this.registerForm.setValue({
+      name: product.name,
+      id: product.id,
+      image: '',
+      model: product.model,
+      amount: product.amount,
+      brand: product.brand,
+      price: product.price,
+      description: product.description,
+      categoryId: product.categoryId
+    });
   }
 
   getProducts(){
@@ -120,18 +205,25 @@ export class EstoqueComponent implements OnInit {
     });
   }
 
+  // Fim
+
   // Categorias
+
+  createCategory(modal: ModalDirective){
+    this.actionMode = 'post';
+    this.entTarget = 'category';
+    modal.show();
+  }
 
   saveChangesC(template){
     if (this.registerCat.valid){
-      this.category = Object.assign({}, this.registerCat.value);
+        this.category = Object.assign({}, this.registerCat.value);
 
-      this.categoryService.postCategory(this.category).subscribe((category: Category) => {
-        console.log(category);
-        template.hide();
-        this.getCategories();
-        this.getProducts();
-      });
+        this.categoryService.postCategory(this.category).subscribe((category: Category) => {
+          console.log(category);
+          this.showSuccess();
+          this.closeModal(template, this.registerCat);
+        });
     }
   }
 
@@ -143,5 +235,31 @@ export class EstoqueComponent implements OnInit {
       console.log(error.message);
     });
   }
+
+  deleteCategory(category: Category, template: ModalDirective){
+    this.entTarget = 'category';
+    this.actionMode = 'delete';
+    this.category = category;
+    template.show();
+    this.deleteForm.patchValue(this.category);
+    this.showWarning();
+  }
+ // Fim
+
+ // Notificações
+ showSuccess(){
+   if (this.actionMode === 'post'){
+    this.toastr.success('Criação concluída', 'Sucesso', {timeOut: 1500, progressBar: true});
+   }
+   else if (this.actionMode === 'put'){
+    this.toastr.success('Atualização concluída', 'Sucesso', {timeOut: 1500, progressBar: true});
+   }else if (this.actionMode === 'delete'){
+    this.toastr.success('Deletado', 'Sucesso', {timeOut: 1500, progressBar: true});
+   }
+}
+
+showWarning(){
+  this.toastr.warning('Isso irá apagar todos os produtos nesta categoria', 'Cuidado', { timeOut: 2500, progressBar: true });
+}
 
 }
