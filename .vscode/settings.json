@@ -5,7 +5,7 @@
             "base": "develop"
         },
         {
-            "name": "feature/cricaoEstoqueComponent",
+            "name": "feature/componentEstoqueFinal",
             "base": "develop"
         }
     ]
