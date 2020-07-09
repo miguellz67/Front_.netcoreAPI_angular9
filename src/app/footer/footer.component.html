@@ -1,0 +1,55 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h4 class="title">NOSSA MISSÃO</h4>
+                <p>Proporcionar aos nossos clientes total satisfação e confiança. Atendendo de forma plena e absoluta
+                    suas necessidades. </p>
+                <ul class="social-icon">
+                    <a href="#" class="social"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="#" class="social"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" class="social"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#" class="social"><i class="fab fa-youtube-play" aria-hidden="true"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google" aria-hidden="true"></i></a>
+                    <a href="#" class="social"><i class="fab fa-dribbble" aria-hidden="true"></i></a>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <h4 class="title">MINHA CONTA</h4>
+                <span class="acount-icon">
+                    <a href="#"><i class="fa fa-heart" aria-hidden="true"></i>Lista de desejos</a>
+                    <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i>Carrinho</a>
+                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i>Perfil</a>
+                    <a href="#"><i class="fa fa-globe" aria-hidden="true"></i>Linguagem</a>
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <h4 class="title">NOSSAS CATEGORIAS</h4>
+                <select #select class="form-control col-md-8">
+                    <option *ngFor="let product of products">{{product.categoryName}}</option>
+                </select>
+                <br>
+                <h4 class="title">PRINCIPAIS MARCAS</h4>
+                <select #select class="form-control col-md-8">
+                    <option *ngFor="let product of products">{{product.brand}}</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <h4 class="title">FORMAS DE PAGAMENTO</h4>
+                <p>Aceitamos os principais cartões de crédito, parcelas em até 12X Sem Juros.
+                </p>
+                <ul class="payment">
+                    <li><a href="#"><i class="fab fa-cc-amex" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-cc-paypal" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-cc-visa" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row text-center"> © 2020. Made with Angular 9 and .NET Core.</div>
+    </div>
+
+
+</footer>
