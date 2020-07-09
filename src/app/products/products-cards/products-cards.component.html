@@ -19,28 +19,9 @@
             </div>
         </div>
     </div>
-
-    <accordion [isAnimated]="true" class="s010">
-        <accordion-group heading="Filtros">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <label class="font-weight-bold" for="typeConge"> Produtos por página: </label>
-                    <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
-                        <option type="number" [ngValue]="3">3</option>
-                        <option type="number" [ngValue]="6">6</option>
-                        <option type="number" [ngValue]="9">9</option>
-                        <option type="number" [ngValue]="1000">Todos</option>
-                    </select>
-                </div>
-            </div>
-        </accordion-group>
-    </accordion>
-
     <div class="row text-center">
-
         <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
             class="col-md-4" style="padding-bottom: 30px;">
-
             <div class="card h-100">
                 <div class="card-header">
                     <h4 class="preco">{{product.categoryName}}</h4>
@@ -62,7 +43,6 @@
                     <button type="button" class="btn btn-primary" (click)="openModal(template)">Detalhes</button>
                 </div>
             </div>
-
             <ng-template #template>
                 <div class="modal-header">
                     <h4 class="modal-title pull-left">{{ product.name | titlecase }}</h4>
@@ -117,14 +97,19 @@
                     </button>
                 </div>
             </ng-template>
-
         </div>
     </div>
-
-
-
 </div>
 <div class="pagination justify-content-center pagination-large">
+    <div>
+        <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
+            <option type="number" [ngValue]="3">Produtos por página</option>
+            <option type="number" [ngValue]="3">3</option>
+            <option type="number" [ngValue]="6">6</option>
+            <option type="number" [ngValue]="9">9</option>
+            <option type="number" [ngValue]="1000">Todos</option>
+        </select>
+    </div>
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
     </pagination-controls>
 </div>
