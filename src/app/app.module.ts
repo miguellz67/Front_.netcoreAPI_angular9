@@ -25,6 +25,7 @@ import { ProductsCardsComponent } from './products/products-cards/products-cards
 import { HomeComponent } from './home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência de paginação
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { ContatoComponent } from './contato/contato.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +33,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
       NavComponent,
       EstoqueComponent,
       ProductsCardsComponent,
-      HomeComponent
+      HomeComponent,
+      ContatoComponent
    ],
    imports: [
       AccordionModule.forRoot(),
