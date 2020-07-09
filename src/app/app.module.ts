@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ToastrModule } from 'ngx-toastr';
 
 import { EstoqueComponent } from './estoque/estoque.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -45,7 +47,9 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
       TooltipModule.forRoot(),
       BsDropdownModule.forRoot(),
       FormsModule,
-      ModalModule.forRoot()
+      ModalModule.forRoot(),
+      TabsModule.forRoot(),
+      ToastrModule.forRoot()
    ],
    providers: [],
    bootstrap: [

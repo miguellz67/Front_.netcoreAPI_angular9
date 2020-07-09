@@ -29,14 +29,18 @@ constructor( private http: HttpClient ) { }
   }
 
   postUpload(file: File, id: string){
-    const fileToUp = file[0] as File;
-    const formData = new FormData();
-    formData.append('file', fileToUp, id + '_' + fileToUp.name);
+      const fileToUp = file[0] as File;
+      const formData = new FormData();
+      formData.append('file', fileToUp, id + '_' + fileToUp.name);
 
-    return this.http.post(`${this.baseURL}/imageUp`, formData);
+      return this.http.post(`${this.baseURL}/imageUp`, formData);
   }
 
   deleteProduct(id: Guid){
     return this.http.delete(`${this.baseURL}/${id}`);
+  }
+
+  putProduct(product: Product){
+    return this.http.put(`${this.baseURL}/${product.id}`, product);
   }
 }

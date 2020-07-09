@@ -1,50 +1,85 @@
-<!--Tabela-->
+<!--Tabelas-->
 <div class="container p-2">
   <h3 class="font-weight-light mb-4">Gerenciamento</h3>
 
-  <button class="btn btn-sm btn-danger mr-2" (click)="openModal(modcat, registerCat)">Categoria +</button>
-  <button class="btn btn-sm btn-danger" (click)="openModal(template, registerForm)">Produto +</button>
+  <button class="btn btn-sm btn-danger mr-2" (click)="createCategory(modcat)">Categoria +</button>
+  <button class="btn btn-sm btn-danger" (click)="createProduct(template)">Produto +</button>
   
-
-  <div class="row mt-5">
-    <div class="w-75">
-      <h4 class="text-center font-weight-light">Produtos</h4>
-      <div class="table-responsive mt-3">
-        <table class="table table-light table-hover">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col"> 
-                <div class="form-inline">
-                  <div class="form-group">
-                    <input type="text" class="form-control border-secondary form-control-sm" placeholder="Filtrar" [(ngModel)]='listFilter'>
-                  </div>
-                </div>
-              </th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Marca</th>
-              <th scope="col">Modelo</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Imagem</th>
-              <th scope="col">Opcões</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="products && products.length">
-            <tr *ngFor="let product of products | filter: listFilter">
-              <td>#</td>
-              <td>{{product.categoryName}}</td>
-              <td>{{product.brand}}</td>
-              <td>{{product.model}}</td>
-              <td>{{product.price}}</td>
-              <td><img src="{{urlImg}}{{product.image}}" width="50%" alt="Imagem {{product.model}}"></td>
-              <td>
-                <button class="btn btn-sm btn-dark" tooltip="Editar" (click)="openModal(template)"><i class="fa fa-edit"></i></button>
-                <button class="btn btn-sm btn-danger"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <div class="container mt-4 p-0">
+    <tabset>
+      <!--Tabela Produtos-->
+      <tab heading="Produtos">
+        <h4 class="text-center font-weight-light mt-2">Produtos</h4>
+          <div class="table-responsive mt-3">
+            <table class="table table-light table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class="text-center">Categoria</th>
+                  <th scope="col" class="text-center">Marca</th>
+                  <th scope="col" class="text-center">Modelo</th>
+                  <th scope="col" class="text-center">Quantidade</th>
+                  <th scope="col" class="text-center">Preço</th>
+                  <th scope="col" class="text-center">Imagem</th>
+                  <th scope="col"> 
+                    <div class="form-inline">
+                      <div class="form-group">
+                        <input type="text" class="form-control border-secondary form-control-sm text-center" placeholder="Filtrar" [(ngModel)]='productFilter'>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngIf="products && products.length">
+                <tr *ngFor="let product of products | filter: productFilter| paginate: { itemsPerPage: 5, currentPage: p } ">
+                  <td class="text-center">{{product.categoryName}}</td>
+                  <td class="text-center">{{product.brand}}</td>
+                  <td class="text-center">{{product.model}}</td>
+                  <td class="text-center">{{product.amount}}</td>
+                  <td class="text-center">{{product.price}}</td>
+                  <td class="text-center"><img src="{{urlImg}}{{product.image}}" width="15%" alt="Imagem {{product.model}}"></td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="putProduct(template, product)"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteProduct(product, deleteMod)"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <pagination-controls class="my-pagination" (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+            </div>
+          </div>
+        
+      </tab>
+    
+       <!--Tabela Categorias-->
+      <tab heading="Categorias">
+          <h4 class="text-center font-weight-light mt-2">Categorias</h4>
+          <div class="table-responsive mt-3">
+            <table class="table table-light table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col"> 
+                    <div class="form-inline mx-auto">
+                      <div class="form-group mx-auto">
+                        <input type="text" class="text-center form-control border-secondary form-control-sm" placeholder="Filtrar" [(ngModel)]='productFilter'>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngIf="categories && categories.length ">
+                <tr *ngFor="let category of categories | filter: categoryFilter">
+                  <td>{{category.name}}</td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-danger" (click)="deleteCategory(category, deleteMod)"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </tab>
+    </tabset>
   </div>
 </div>
 
@@ -155,14 +190,12 @@
                 Mínimo de 1 item
               </div>
             </div>
-
           </div>
-          <button class="btn btn-sm btn-dark mr-1" tooltip="Cancelar"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-          <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid" (click)="saveChangesP(template)" tooltip="Inserir"><i class="fa fa-plus" aria-hidden="true"></i></button>
         </form>
       </div>
-      <div class="modal-footer">
-        <p>form: {{registerForm.value| json}}</p>
+      <div class="modal-footer text-align-right">
+        <button class="btn btn-sm btn-dark mr-1">Cancelar</button>
+          <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid" (click)="saveChangesP(template)" tooltip="Inserir"><i class="fa fa-check" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>
@@ -179,12 +212,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-4">
+      <div class="modal-body px-4">
         <form [formGroup]="registerCat">
           <div class="form-row">
             <div class="form-group">
               <label for="inputName">Nome</label>
-              <input type="text" class="form-control" id="inputName" formControlName="name" [ngClass]="{'is-invalid': registerCat.get('name').errors && registerCat.get('name').touched}">
+              <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': registerCat.get('name').errors && registerCat.get('name').touched}">
               <div *ngIf="registerCat.get('name').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
@@ -196,13 +229,36 @@
           </div>
         </form>
       </div>
-      <div class="model-footer">
-        <button class="btn btn-sm btn-danger" [disabled]="!registerCat.valid" (click)="saveChangesC(modcat)"><i class="fa fa-plus" aria-hidden="true"></i></button>
-        <p>Form valide:{{registerCat.valid}}</p>
-        <p>Values: {{registerCat.value | json}}</p>
+      <div class="model-footer d-flex flex-row-reverse p-2">
+        <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerCat.valid" (click)="saveChangesC(modcat)"><i class="fa fa-check" aria-hidden="true"></i></button>
+        <button class="btn btn-sm btn-dark mr-1">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
 
-
+<!--Modal Deletar-->
+<div class="modal fade" bsModal #deleteMod="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left font-weight-light">Exclusão</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal(deleteMod)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-4">
+        <form [formGroup]="deleteForm">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" class="form-control border-0 font-weight-bold" formControlName="name" disabled>
+              <input type="hidden" formControlName="id">
+            </div>
+          </div>
+          <button class="btn btn-sm btn-danger" (click)="deleteConfirm(deleteMod)">Deletar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
