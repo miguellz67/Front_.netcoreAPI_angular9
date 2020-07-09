@@ -11,6 +11,10 @@
         {
             "name": "feature/componentEstoqueFinal",
             "base": "develop"
+        },
+        {
+            "name": "feature/correcaoEstoque",
+            "base": "develop"
         }
     ]
 }

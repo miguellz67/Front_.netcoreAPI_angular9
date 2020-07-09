@@ -62,7 +62,7 @@
                   <th scope="col"> 
                     <div class="form-inline mx-auto">
                       <div class="form-group mx-auto">
-                        <input type="text" class="text-center form-control border-secondary form-control-sm" placeholder="Filtrar" [(ngModel)]='productFilter'>
+                        <input type="text" class="text-center form-control border-secondary form-control-sm" placeholder="Filtrar" [(ngModel)]='categoryFilter'>
                       </div>
                     </div>
                   </th>
@@ -173,6 +173,7 @@
             <div class="form-group col-md-3">
               <label for="inputState">Categoria</label>
               <select id="inputState" class="form-control" formControlName="categoryId" [ngClass]="{'is-invalid': registerForm.get('categoryId').errors && registerForm.get('categoryId').touched}">
+                <option disabled selected></option>
                 <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
               </select>
               <div *ngIf="registerForm.get('categoryId').hasError('required')" class="invalid-feedback">
@@ -194,7 +195,7 @@
         </form>
       </div>
       <div class="modal-footer text-align-right">
-        <button class="btn btn-sm btn-dark mr-1">Cancelar</button>
+        <button class="btn btn-sm btn-dark mr-1" (click)='closeModal(template, registerForm)'>Cancelar</button>
           <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid" (click)="saveChangesP(template)" tooltip="Inserir"><i class="fa fa-check" aria-hidden="true"></i></button>
       </div>
     </div>
@@ -231,7 +232,7 @@
       </div>
       <div class="model-footer d-flex flex-row-reverse p-2">
         <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerCat.valid" (click)="saveChangesC(modcat)"><i class="fa fa-check" aria-hidden="true"></i></button>
-        <button class="btn btn-sm btn-dark mr-1">Cancelar</button>
+        <button class="btn btn-sm btn-dark mr-1" (click)='closeModal(modcat, registerCat)'>Cancelar</button>
       </div>
     </div>
   </div>

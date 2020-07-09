@@ -29,7 +29,7 @@ constructor( private http: HttpClient ) { }
   }
 
   postUpload(file: File, id: string){
-      const fileToUp = file[0] as File;
+      const fileToUp = file as File;
       const formData = new FormData();
       formData.append('file', fileToUp, id + '_' + fileToUp.name);
 

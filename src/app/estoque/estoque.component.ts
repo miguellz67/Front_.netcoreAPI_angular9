@@ -17,7 +17,6 @@ import { ToastrService } from 'ngx-toastr';
 export class EstoqueComponent implements OnInit {
   urlImg = 'http://localhost:5000/images/';
   imageName: string;
-  imageAtt: string;
   products: Product[];
   product: Product;
   categories: Category[];
@@ -86,6 +85,7 @@ export class EstoqueComponent implements OnInit {
     if (this.entTarget === 'product'){
       this.getProducts();
       this.getCategories();
+      this.file = undefined;
     }else if (this.entTarget === 'category'){
       this.getCategories();
       this.getProducts();
@@ -107,32 +107,35 @@ export class EstoqueComponent implements OnInit {
           this.product = Object.assign({}, this.registerForm.value);
           const imgId = Guid.create().toString();
 
-          this.productService.postUpload(this.file, imgId).subscribe();
+          if (!this.file){
+            this.toastr.error('Insira uma imagem para o produto!', 'Erro', { timeOut: 2500 });
+          }else{
+            this.productService.postUpload(this.file, imgId).subscribe();
 
-          this.product.image = imgId + '_' + this.imageName;
+            this.product.image = imgId + '_' + this.imageName;
 
-          this.productService.postProduct(this.product).subscribe((product: Product) => {
-            console.log(product);
-            this.closeModal(template, this.registerForm);
-            this.showSuccess();
-
-          }, error => {
-            console.log(error.message);
-          });
+            this.productService.postProduct(this.product).subscribe((product: Product) => {
+              console.log(product);
+              this.closeModal(template, this.registerForm);
+              this.showSuccess();
+            }, error => {
+              console.log(error.message);
+            });
+          }
       }else if (this.actionMode === 'put'){
         this.product = Object.assign({}, this.registerForm.value);
 
         const imgId = Guid.create().toString();
 
-        if (this.file){
+        if (this.file && this.file.size > 0){
           this.productService.postUpload(this.file, imgId).subscribe();
           this.product.image = imgId + '_' + this.imageName;
-          this.productService.putProduct(this.product).subscribe(() => { this.closeModal(template, this.registerForm); });
+          this.productService.putProduct(this.product).subscribe(() => {
+            this.closeModal(template, this.registerForm);
+          });
         }else{
-          this.product.image = this.imageAtt;
           this.productService.putProduct(this.product).subscribe(() => { this.closeModal(template, this.registerForm); });
         }
-        this.imageAtt = '';
         this.showSuccess();
       }
     }
@@ -140,8 +143,8 @@ export class EstoqueComponent implements OnInit {
 
   onFileChange(event){
     if (event.target.files && event.target.files.length){
-      this.file = event.target.files;
-      this.imageName = this.file[0].name;
+      this.file = event.target.files[0];
+      this.imageName = this.file.name;
       console.log(this.imageName);
       console.log(this.file);
     }
@@ -175,9 +178,8 @@ export class EstoqueComponent implements OnInit {
   putProduct(modal: ModalDirective, product: Product){
     this.actionMode = 'put';
     this.entTarget = 'product';
-    this.product = product;
-    this.imageAtt = product.image;
     modal.show();
+    console.log(this.file);
     this.registerForm.setValue({
       name: product.name,
       id: product.id,
