@@ -9,3 +9,19 @@
 thead>tr>th {
     cursor: pointer;
 }
+body {
+    background-image: url('../../../fundo/dut.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.my-pagination .ngx-pagination a {
+    background:  #ffffff77;
+}
+.my-pagination .ngx-pagination span {
+    color:  #ffffff;
+}
+.my-pagination .ngx-pagination .current {
+    background:  #ff00009d;
+}

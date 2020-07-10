@@ -21,10 +21,10 @@
     </div>
     <div class="row text-center">
         <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
-            class="col-md-4" style="padding-bottom: 30px;">
-            <div class="card h-100">
+            class="col-lg-3" style="padding-bottom: 30px;">
+            <div class="card text-white bg-dark h-100" style="background-color: rgba(0, 0, 0, 0.363) !important;">
                 <div class="card-header">
-                    <h4 class="preco">{{product.categoryName}}</h4>
+                    <h5 class="preco">{{product.categoryName}}</h5>
                 </div>
                 <br>
                 <a class="text-decoration-none">
@@ -33,7 +33,7 @@
                     </div>
                 </a>
                 <div class="card-body">
-                    <h4 class="card-title">{{ product.name | titlecase }}</h4>
+                    <h5 class="card-title">{{ product.name | titlecase }}</h5>
                     <p>Por apenas:</p>
                     <div>
                         <h4>{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h4>
@@ -103,13 +103,13 @@
 <div class="pagination justify-content-center pagination-large">
     <div>
         <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
-            <option type="number" [ngValue]="3">Produtos por página</option>
-            <option type="number" [ngValue]="3">3</option>
-            <option type="number" [ngValue]="6">6</option>
-            <option type="number" [ngValue]="9">9</option>
+            <option type="number" [ngValue]="4">Produtos por página</option>
+            <option type="number" [ngValue]="4">4</option>
+            <option type="number" [ngValue]="8">8</option>
+            <option type="number" [ngValue]="16">16</option>
             <option type="number" [ngValue]="1000">Todos</option>
         </select>
     </div>
-    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+    <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
     </pagination-controls>
 </div>

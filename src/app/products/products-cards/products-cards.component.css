@@ -817,7 +817,7 @@ html {
         justify-content: center;
     -ms-flex-align: center;
         align-items: center;
-    background: #FFF;
+    background: rgba(255, 255, 255, 0);
     padding: 15px;
     font-family: 'Lato', sans-serif;
   }
@@ -845,7 +845,7 @@ html {
     font-size: 18px;
     height: 70px;
     color: #fff;
-    background: linear-gradient(to right, #2c6dd5 0%, #2c6dd5 28%, #ff4b5a 91%, #ff4b5a 100%);
+    background: linear-gradient(to right, #2c6dd570 0%, #2c6dd58f 28%, #ff4b5a94 91%, #ff31426c 100%);
     font-family: 'Lato', sans-serif;
   }
   
