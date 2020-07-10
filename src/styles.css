@@ -25,3 +25,9 @@ body {
 .my-pagination .ngx-pagination .current {
     background:  #ff00009d;
 }
+
+.carousel img{
+    position: relative;
+    width: 40% !important;
+    height: 40% !important;
+}
