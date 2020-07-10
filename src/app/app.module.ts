@@ -11,6 +11,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 
 import { EstoqueComponent } from './estoque/estoque.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -39,6 +41,7 @@ import { FooterComponent } from './footer/footer.component';
       FooterComponent
    ],
    imports: [
+      CarouselModule.forRoot(),
       AccordionModule.forRoot(),
       BrowserModule,
       ModalModule.forRoot(),
