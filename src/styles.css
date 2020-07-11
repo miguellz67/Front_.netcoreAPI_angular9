@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 @import '../node_modules/ngx-toastr/toastr';
-
 .preco {
     color: rgb(5, 0, 0) !important;
 }
@@ -33,11 +33,70 @@ h4 {
 }
 
 .my-pagination .ngx-pagination a {
-    background:  #ffffff77;
+    background: #ffffff77;
 }
+
 .my-pagination .ngx-pagination span {
-    color:  #ffffff;
+    color: #ffffff;
 }
+
 .my-pagination .ngx-pagination .current {
-    background:  #ff00009d;
+    background: #ff00009d;
+}
+
+/* modal */
+
+input, textarea, select, option {
+    background: rgba(128, 128, 128, 0.226) !important;
+    border: none !important;
+    color: #FFF !important;
+}
+
+option {
+    background-color: rgba(0, 0, 0, 0.603) !important;
+}
+
+input::placeholder, label {
+    color: #FFF !important;
+}
+
+.btn-danger {
+    background: rgba(255, 0, 0, 0.349) !important;
+}
+
+.btn-primary {
+    background: rgba(0, 4, 255, 0.349) !important;
+}
+
+.modal-content {
+    background: linear-gradient(45deg, #000000a9 10%, #3331317e 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.modal-header {
+    background: linear-gradient(45deg, #000000d7 10%, #3331313f 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.card.mb-3 {
+    background: linear-gradient(45deg, #000000d7 10%, #3331313f 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.jumbotron {
+    background: linear-gradient(45deg, #000000d7 10%, #3331313f 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.close {
+    color: #FFF !important;
+    font-size: 28px !important;
+}
+
+/* fim modal */
+
+/* Guias estoque*/
+
+.nav-link span {
+    color: #ff0000c7 !important;
 }

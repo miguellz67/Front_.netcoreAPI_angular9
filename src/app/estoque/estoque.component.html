@@ -4,98 +4,108 @@
 
   <button class="btn btn-sm btn-danger mr-2" (click)="createCategory(modcat)">Categoria +</button>
   <button class="btn btn-sm btn-danger" (click)="createProduct(template)">Produto +</button>
-  
+
   <div class="container mt-4 p-0" id="test">
     <tabset>
       <!--Tabela Produtos-->
       <tab heading="Produtos">
         <h4 class="text-center font-weight-light mt-2">Produtos</h4>
-          <div class="table-responsive mt-3">
-            <table class="table table-dark table-hover" style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important; color: rgba(255, 255, 255, 0.733) !important">
-              <thead style="background: linear-gradient(to top, #00000062 10%, #ffffff3f 90%) !important;">
-                <tr>
-                  <th scope="col" class="text-center">Categoria</th>
-                  <th scope="col" class="text-center">Marca</th>
-                  <th scope="col" class="text-center">Modelo</th>
-                  <th scope="col" class="text-center">Quantidade</th>
-                  <th scope="col" class="text-center">Preço</th>
-                  <th scope="col" class="text-center">Imagem</th>
-                  <th scope="col"> 
-                    <div class="form-inline">
-                      <div class="form-group">
-                        <input type="text" class="form-control border-secondary form-control-sm text-center" placeholder="Filtrar" [(ngModel)]='productFilter'>
-                      </div>
+        <div class="table-responsive mt-3">
+          <table class="table table-dark table-hover"
+            style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important; color: rgba(255, 255, 255, 0.733) !important">
+            <thead style="background: linear-gradient(to top, #00000062 10%, #ffffff3f 90%) !important;">
+              <tr>
+                <th scope="col" class="text-center">Categoria</th>
+                <th scope="col" class="text-center">Marca</th>
+                <th scope="col" class="text-center">Modelo</th>
+                <th scope="col" class="text-center">Quantidade</th>
+                <th scope="col" class="text-center">Preço</th>
+                <th scope="col" class="text-center">Imagem</th>
+                <th scope="col">
+                  <div class="form-inline">
+                    <div class="form-group">
+                      <input type="text" class="form-control border-secondary form-control-sm text-center"
+                        placeholder="Filtrar" [(ngModel)]='productFilter'>
                     </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody *ngIf="products && products.length">
-                <tr *ngFor="let product of products | filter: productFilter| paginate: { itemsPerPage: paginas, currentPage: paginaAtual } ">
-                  <td class="text-center">{{product.categoryName}}</td>
-                  <td class="text-center">{{product.brand}}</td>
-                  <td class="text-center">{{product.model}}</td>
-                  <td class="text-center">{{product.amount}}</td>
-                  <td class="text-center">{{product.price}}</td>
-                  <td class="text-center"><img src="{{urlImg}}{{product.image}}" width="15%" alt="Imagem {{product.model}}"></td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="putProduct(template, product)"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-sm btn-danger" (click)="deleteProduct(product, deleteMod)"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            
-          </div>
-        
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="products && products.length">
+              <tr
+                *ngFor="let product of products | filter: productFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual } ">
+                <td class="text-center">{{product.categoryName}}</td>
+                <td class="text-center">{{product.brand}}</td>
+                <td class="text-center">{{product.model}}</td>
+                <td class="text-center">{{product.amount}}</td>
+                <td class="text-center">{{product.price}}</td>
+                <td class="text-center"><img src="{{urlImg}}{{product.image}}" width="15%"
+                    alt="Imagem {{product.model}}"></td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="putProduct(template, product)"><i
+                      class="fa fa-edit"></i></button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteProduct(product, deleteMod)"><i
+                      class="fa fa-eraser" tooltip="Excluir"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </tab>
-      <div class="pagination justify-content-center pagination-large mb-3">
-        <div>
-            <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
-                <option type="number" [ngValue]="4" selected>Produtos por página</option>
-                <option type="number" [ngValue]="4">4</option>
-                <option type="number" [ngValue]="8">8</option>
-                <option type="number" [ngValue]="16">16</option>
-                <option type="number" [ngValue]="1000">Todos</option>
-            </select>
-        </div>
-        <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
-        </pagination-controls>
-        </div>
-    
-       <!--Tabela Categorias-->
+
+      <!--Tabela Categorias-->
       <tab heading="Categorias">
-          <h4 class="text-center font-weight-light mt-2">Categorias</h4>
-          <div class="table-responsive mt-3">
-            <table class="table table-dark table-hover" style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important; color: rgba(255, 255, 255, 0.733) !important">
-              <thead style="background: linear-gradient(to top, #00000062 10%, #ffffff3f 90%) !important;">
-                <tr>
-                  <th scope="col">Nome</th>
-                  <th scope="col"> 
-                    <div class="form-inline mx-auto">
-                      <div class="form-group mx-auto">
-                        <input type="text" class="text-center form-control border-secondary form-control-sm" placeholder="Filtrar" [(ngModel)]='categoryFilter'>
-                      </div>
+        <h4 class="text-center font-weight-light mt-2">Categorias</h4>
+        <div class="table-responsive mt-3">
+          <table class="table table-dark table-hover"
+            style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important; color: rgba(255, 255, 255, 0.733) !important">
+            <thead style="background: linear-gradient(to top, #00000062 10%, #ffffff3f 90%) !important;">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">
+                  <div class="form-inline mx-auto">
+                    <div class="form-group mx-auto">
+                      <input type="text" class="text-center form-control border-secondary form-control-sm"
+                        placeholder="Filtrar" [(ngModel)]='categoryFilter'>
                     </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody *ngIf="categories && categories.length ">
-                <tr *ngFor="let category of categories | filter: categoryFilter">
-                  <td>{{category.name}}</td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-danger" (click)="deleteCategory(category, deleteMod)"><i class="fa fa-eraser" tooltip="Excluir"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="categories && categories.length ">
+              <tr
+                *ngFor="let category of categories | filter: categoryFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }">
+                <td>{{category.name}}</td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-danger" (click)="deleteCategory(category, deleteMod)"><i
+                      class="fa fa-eraser" tooltip="Excluir"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </tab>
     </tabset>
   </div>
 </div>
-
+<!--Paginacao-->
+<div class="pagination justify-content-center pagination-large mb-3">
+  <div>
+    <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
+      <option type="number" [ngValue]="4" selected>Produtos por página</option>
+      <option type="number" [ngValue]="4">4</option>
+      <option type="number" [ngValue]="8">8</option>
+      <option type="number" [ngValue]="16">16</option>
+      <option type="number" [ngValue]="1000">Todos</option>
+    </select>
+  </div>
+  <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+    nextLabel="Próximo">
+  </pagination-controls>
+</div>
 <!--Modal Produto-->
-<div class="modal fade" tabindex="-1" role="dialog" bsModal #template="bs-modal" [config]="{backdrop:'static'}" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" tabindex="-1" role="dialog" bsModal #template="bs-modal" [config]="{backdrop:'static'}"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -110,7 +120,8 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputTitle">Título</label>
-              <input type="text" class="form-control" id="inputTitle" formControlName="name" [ngClass]="{'is-invalid': registerForm.get('name').errors && registerForm.get('name').touched}">
+              <input type="text" class="form-control" id="inputTitle" formControlName="name"
+                [ngClass]="{'is-invalid': registerForm.get('name').errors && registerForm.get('name').touched}">
               <div *ngIf="registerForm.get('name').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
@@ -118,10 +129,11 @@
                 Mínimo de 15 caracteres
               </div>
             </div>
-            
+
             <div class="form-group col-md-3">
               <label for="inputBrand">Marca</label>
-              <input type="text" class="form-control" id="inputBrand" formControlName="brand" [ngClass]="{'is-invalid': registerForm.get('brand').errors && registerForm.get('brand').touched}">
+              <input type="text" class="form-control" id="inputBrand" formControlName="brand"
+                [ngClass]="{'is-invalid': registerForm.get('brand').errors && registerForm.get('brand').touched}">
               <div *ngIf="registerForm.get('brand').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
@@ -132,7 +144,8 @@
 
             <div class="form-group col-md-3">
               <label for="inputModel">Modelo</label>
-              <input type="text" class="form-control" id="inputModel" formControlName="model" [ngClass]="{'is-invalid': registerForm.get('model').errors && registerForm.get('model').touched}">
+              <input type="text" class="form-control" id="inputModel" formControlName="model"
+                [ngClass]="{'is-invalid': registerForm.get('model').errors && registerForm.get('model').touched}">
 
               <div *ngIf="registerForm.get('model').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
@@ -142,10 +155,11 @@
               </div>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label for="inputDescription">Descrição</label>
-            <textarea id="inputDescription" class="form-control" cols="30" rows="3" formControlName="description" [ngClass]="{'is-invalid': registerForm.get('description').errors && registerForm.get('description').touched}"></textarea>
+            <textarea id="inputDescription" class="form-control" cols="30" rows="3" formControlName="description"
+              [ngClass]="{'is-invalid': registerForm.get('description').errors && registerForm.get('description').touched}"></textarea>
             <div *ngIf="registerForm.get('description').hasError('required')" class="invalid-feedback">
               Campo obrigatório
             </div>
@@ -161,7 +175,9 @@
                 <tr>
                   <td>
                     <button class="btn btn-danger" (click)="file.click()">Inserir</button>
-                    <input type="file" #file id="inputImage" class="d-none" accept="image/*" (change)="onFileChange($event)" formControlName="image" [ngClass]="{'is-invalid': registerForm.get('image').errors && registerForm.get('image').touched}">
+                    <input type="file" #file id="inputImage" class="d-none" accept="image/*"
+                      (change)="onFileChange($event)" formControlName="image"
+                      [ngClass]="{'is-invalid': registerForm.get('image').errors && registerForm.get('image').touched}">
                   </td>
                 </tr>
               </table>
@@ -172,7 +188,8 @@
 
             <div class="form-group col-md-2">
               <label for="inputPrice">Preço</label>
-              <input type="number" class="form-control" id="inputPrice" formControlName="price" [ngClass]="{'is-invalid': registerForm.get('price').errors && registerForm.get('price').touched}">
+              <input type="number" class="form-control" id="inputPrice" formControlName="price"
+                [ngClass]="{'is-invalid': registerForm.get('price').errors && registerForm.get('price').touched}">
               <div *ngIf="registerForm.get('price').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
@@ -183,7 +200,8 @@
 
             <div class="form-group col-md-3">
               <label for="inputState">Categoria</label>
-              <select id="inputState" class="form-control" formControlName="categoryId" [ngClass]="{'is-invalid': registerForm.get('categoryId').errors && registerForm.get('categoryId').touched}">
+              <select id="inputState" class="form-control" formControlName="categoryId"
+                [ngClass]="{'is-invalid': registerForm.get('categoryId').errors && registerForm.get('categoryId').touched}">
                 <option disabled selected></option>
                 <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
               </select>
@@ -191,10 +209,11 @@
                 Campo obrigatório
               </div>
             </div>
-            
+
             <div class="form-group col-md-1">
               <label for="inputAmount">Disponível</label>
-              <input type="number" class="form-control" id="inputAmount" formControlName="amount" [ngClass]="{'is-invalid': registerForm.get('amount').errors && registerForm.get('amount').touched}">
+              <input type="number" class="form-control" id="inputAmount" formControlName="amount"
+                [ngClass]="{'is-invalid': registerForm.get('amount').errors && registerForm.get('amount').touched}">
               <div *ngIf="registerForm.get('amount').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
@@ -207,15 +226,16 @@
       </div>
       <div class="modal-footer text-align-right">
         <button class="btn btn-sm btn-dark mr-1" (click)='closeModal(template, registerForm)'>Cancelar</button>
-          <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid" (click)="saveChangesP(template)" tooltip="Inserir"><i class="fa fa-check" aria-hidden="true"></i></button>
+        <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerForm.valid"
+          (click)="saveChangesP(template)" tooltip="Inserir"><i class="fa fa-check" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>
 </div>
 
 <!--Modal Categoria-->
-<div class="modal fade" bsModal #modcat="bs-modal" [config]="{backdrop: 'static'}"
-     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+<div class="modal fade" bsModal #modcat="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -229,7 +249,8 @@
           <div class="form-row">
             <div class="form-group">
               <label for="inputName">Nome</label>
-              <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': registerCat.get('name').errors && registerCat.get('name').touched}">
+              <input type="text" class="form-control" formControlName="name"
+                [ngClass]="{'is-invalid': registerCat.get('name').errors && registerCat.get('name').touched}">
               <div *ngIf="registerCat.get('name').hasError('required')" class="invalid-feedback">
                 Campo obrigatório
               </div>
@@ -242,7 +263,8 @@
         </form>
       </div>
       <div class="model-footer d-flex flex-row-reverse p-2">
-        <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerCat.valid" (click)="saveChangesC(modcat)"><i class="fa fa-check" aria-hidden="true"></i></button>
+        <button type="submit" class="btn btn-sm btn-danger" [disabled]="!registerCat.valid"
+          (click)="saveChangesC(modcat)"><i class="fa fa-check" aria-hidden="true"></i></button>
         <button class="btn btn-sm btn-dark mr-1" (click)='closeModal(modcat, registerCat)'>Cancelar</button>
       </div>
     </div>
@@ -250,8 +272,8 @@
 </div>
 
 <!--Modal Deletar-->
-<div class="modal fade" bsModal #deleteMod="bs-modal" [config]="{backdrop: 'static'}"
-     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+<div class="modal fade" bsModal #deleteMod="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
