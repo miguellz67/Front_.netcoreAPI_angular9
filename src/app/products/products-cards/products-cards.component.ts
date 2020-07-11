@@ -22,7 +22,7 @@ export class ProductsCardsComponent implements OnInit {
 
   modalRef: BsModalRef;
   _listFilter: string;
-  _paginas: number = 3;
+  _paginas = 4;
 
   get listFilter() {
     return this._listFilter;
@@ -47,7 +47,9 @@ export class ProductsCardsComponent implements OnInit {
     this.getProducts();
     this.getCategories();
   }
+  cc(category){
 
+  }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }

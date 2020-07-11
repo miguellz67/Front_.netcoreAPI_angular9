@@ -2,18 +2,34 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 @import '../node_modules/ngx-toastr/toastr';
+
 .preco {
-    color: green !important;
+    color: rgb(143, 1, 1) !important;
 }
 
 thead>tr>th {
     cursor: pointer;
 }
+
+@font-face {
+    font-family: personalized;
+    src: url(./assets/_fonts/Alforim.ttf)
+}
+
 body {
-    background-image: url('../../../fundo/dut.jpg');
+    background-image: url('../src/assets/dut.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+}
+
+.fPer {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgba(255, 0, 0, 0.432);
+}
+
+h4 {
+    font-weight: lighter;
 }
 
 .my-pagination .ngx-pagination a {
@@ -24,10 +40,4 @@ body {
 }
 .my-pagination .ngx-pagination .current {
     background:  #ff00009d;
-}
-
-.carousel img{
-    position: relative;
-    width: 40% !important;
-    height: 40% !important;
 }
