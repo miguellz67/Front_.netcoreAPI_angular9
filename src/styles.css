@@ -4,7 +4,7 @@
 @import '../node_modules/ngx-toastr/toastr';
 
 .preco {
-    color: rgb(143, 1, 1) !important;
+    color: rgb(5, 0, 0) !important;
 }
 
 thead>tr>th {

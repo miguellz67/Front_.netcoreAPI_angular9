@@ -50,9 +50,13 @@ export class ProductsCardsComponent implements OnInit {
   cc(category){
 
   }
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
+  
+  openModalWithClass(template: TemplateRef<any>) {  
+    this.modalRef = this.modalService.show(  
+      template,  
+      Object.assign({}, { class: 'gray modal-lg' })  
+    );  
+  }  
 
   getCategories() {
     return this.categoryService.getCategories().subscribe((categories: Category[]) => {
