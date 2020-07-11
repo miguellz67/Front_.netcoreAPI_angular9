@@ -90,6 +90,7 @@ export class EstoqueComponent implements OnInit {
       this.getCategories();
       this.getProducts();
     }
+    document.getElementById('test').style.filter = 'blur(0)';
     modal.hide();
   }
 
@@ -214,6 +215,7 @@ export class EstoqueComponent implements OnInit {
   createCategory(modal: ModalDirective){
     this.actionMode = 'post';
     this.entTarget = 'category';
+    document.getElementById('test').style.filter = 'blur(2px)';
     modal.show();
   }
 
