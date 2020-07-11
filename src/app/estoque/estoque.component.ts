@@ -22,7 +22,6 @@ export class EstoqueComponent implements OnInit {
   categories: Category[];
   category: Category;
   file: File;
-  p = 1;
   // Put, Post ou Delete
   actionMode = '';
   // Category ou Product
@@ -35,6 +34,16 @@ export class EstoqueComponent implements OnInit {
   registerForm: FormGroup;
   registerCat: FormGroup;
   deleteForm: FormGroup;
+
+  //Paginação
+  _paginas = 4;
+  public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.  
+  get paginas() {
+    return this._paginas;
+  }
+  set paginas(value: number) {
+    this._paginas = value;
+  }
 
   get productFilter(){
    return this._productFilter;

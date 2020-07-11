@@ -22,7 +22,7 @@
     <div class="row text-center">
         <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
             class="col-lg-3" style="padding-bottom: 30px;">
-            <div class="card text-white bg-dark h-100 border-danger" style="background: linear-gradient(to top, #00000062 10%, #ffffff69 90%) !important;">
+            <div class="card text-white bg-dark h-100 " style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important;">
                 <div class="card-header">
                     <h5 class="preco">{{product.categoryName}}</h5>
                 </div>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-danger" (click)="openModal(template)">Detalhes</button>
+                    <button type="button" class="btn btn-danger" (click)="openModalWithClass(template)">Detalhes</button>
                 </div>
             </div>
             <ng-template #template>
