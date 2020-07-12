@@ -108,6 +108,7 @@ export class EstoqueComponent implements OnInit {
   createProduct(modal: ModalDirective){
     this.actionMode = 'post';
     this.entTarget = 'product';
+    document.getElementById('test').style.filter = 'blur(2px)';
     modal.show();
   }
 
@@ -164,6 +165,7 @@ export class EstoqueComponent implements OnInit {
     this.entTarget = 'product';
     this.actionMode = 'delete';
     this.product = product;
+    document.getElementById('test').style.filter = 'blur(2px)';
     modal.show();
     this.deleteForm.patchValue(this.product);
   }
@@ -188,6 +190,7 @@ export class EstoqueComponent implements OnInit {
   putProduct(modal: ModalDirective, product: Product){
     this.actionMode = 'put';
     this.entTarget = 'product';
+    document.getElementById('test').style.filter = 'blur(2px)';
     modal.show();
     console.log(this.file);
     this.registerForm.setValue({
@@ -253,6 +256,7 @@ export class EstoqueComponent implements OnInit {
     this.entTarget = 'category';
     this.actionMode = 'delete';
     this.category = category;
+    document.getElementById('test').style.filter = 'blur(2px)';
     template.show();
     this.deleteForm.patchValue(this.category);
     this.showWarning();

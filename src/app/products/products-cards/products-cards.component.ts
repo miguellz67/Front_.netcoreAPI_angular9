@@ -20,7 +20,16 @@ export class ProductsCardsComponent implements OnInit {
   category: Category;
   public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
 
+  //Modal
   modalRef: BsModalRef;
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: true,
+    ignoreBackdropClick: false,
+    class: "my-modal"
+  }
+
   _listFilter: string;
   _paginas = 4;
 
@@ -47,16 +56,16 @@ export class ProductsCardsComponent implements OnInit {
     this.getProducts();
     this.getCategories();
   }
-  cc(category){
+  cc(category) {
 
   }
-  
-  openModalWithClass(template: TemplateRef<any>) {  
-    this.modalRef = this.modalService.show(  
-      template,  
-      Object.assign({}, { class: 'gray modal-lg' })  
-    );  
-  }  
+
+  openModalWithClass(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+  }
 
   getCategories() {
     return this.categoryService.getCategories().subscribe((categories: Category[]) => {

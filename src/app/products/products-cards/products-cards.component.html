@@ -22,7 +22,8 @@
     <div class="row text-center">
         <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
             class="col-lg-3" style="padding-bottom: 30px;">
-            <div class="card text-white bg-dark h-100 " style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important;">
+            <div class="card text-white bg-dark h-100 "
+                style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important;">
                 <div class="card-header">
                     <h5 class="preco">{{product.categoryName}}</h5>
                 </div>
@@ -43,7 +44,8 @@
                     <button type="button" class="btn btn-danger" (click)="openModalWithClass(template)">Detalhes</button>
                 </div>
             </div>
-            <ng-template #template>
+            <!-- modal -->
+            <ng-template #template class="myClass">
                 <div class="modal-header">
                     <h4 class="modal-title pull-left">{{ product.name | titlecase }}</h4>
                     <br>
@@ -64,7 +66,7 @@
                             <div class="col-md-4 ml-auto">
                                 <h6>Por apenas:</h6>
                                 <div>
-                                    <h4 class="preco">{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h4>
+                                    <h4>{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +99,7 @@
                     </button>
                 </div>
             </ng-template>
+            <!-- fim-modal -->
         </div>
     </div>
 </div>
@@ -110,6 +113,7 @@
             <option type="number" [ngValue]="1000">Todos</option>
         </select>
     </div>
-    <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+    <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+        nextLabel="Próximo">
     </pagination-controls>
 </div>
