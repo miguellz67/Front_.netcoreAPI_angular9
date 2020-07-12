@@ -96,7 +96,7 @@
       <option type="number" [ngValue]="4">4</option>
       <option type="number" [ngValue]="8">8</option>
       <option type="number" [ngValue]="16">16</option>
-      <option type="number" [ngValue]="1000">Todos</option>
+      <option type="number" [ngValue]="products.length">Todos</option>
     </select>
   </div>
   <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
