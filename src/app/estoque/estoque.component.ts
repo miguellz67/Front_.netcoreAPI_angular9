@@ -108,7 +108,7 @@ export class EstoqueComponent implements OnInit {
   createProduct(modal: ModalDirective){
     this.actionMode = 'post';
     this.entTarget = 'product';
-    document.getElementById('test').style.filter = 'blur(2px)';
+    this.createBlur();
     modal.show();
   }
 
@@ -165,7 +165,7 @@ export class EstoqueComponent implements OnInit {
     this.entTarget = 'product';
     this.actionMode = 'delete';
     this.product = product;
-    document.getElementById('test').style.filter = 'blur(2px)';
+    this.createBlur();
     modal.show();
     this.deleteForm.patchValue(this.product);
   }
@@ -190,7 +190,7 @@ export class EstoqueComponent implements OnInit {
   putProduct(modal: ModalDirective, product: Product){
     this.actionMode = 'put';
     this.entTarget = 'product';
-    document.getElementById('test').style.filter = 'blur(2px)';
+    this.createBlur();
     modal.show();
     console.log(this.file);
     this.registerForm.setValue({
@@ -227,7 +227,7 @@ export class EstoqueComponent implements OnInit {
   createCategory(modal: ModalDirective){
     this.actionMode = 'post';
     this.entTarget = 'category';
-    document.getElementById('test').style.filter = 'blur(2px)';
+    this.createBlur();
     modal.show();
   }
 
@@ -256,7 +256,7 @@ export class EstoqueComponent implements OnInit {
     this.entTarget = 'category';
     this.actionMode = 'delete';
     this.category = category;
-    document.getElementById('test').style.filter = 'blur(2px)';
+    this.createBlur();
     template.show();
     this.deleteForm.patchValue(this.category);
     this.showWarning();
@@ -277,6 +277,11 @@ export class EstoqueComponent implements OnInit {
 
 showWarning(){
   this.toastr.warning('Isso irá apagar todos os produtos nesta categoria', 'Cuidado', { timeOut: 2500, progressBar: true });
+}
+
+// Geral
+createBlur(){
+  document.getElementById('test').style.filter = 'blur(3px)';
 }
 
 }
