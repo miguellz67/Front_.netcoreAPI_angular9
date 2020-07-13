@@ -28,12 +28,6 @@ body {
 
 h4 {
     font-weight: lighter;
-    font-family: Franklin Gothic;
-}
-
-h5 {
-    font-family: personalized;
-    color: darkorchid;
 }
 
 .my-pagination .ngx-pagination a {
