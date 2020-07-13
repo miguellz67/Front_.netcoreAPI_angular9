@@ -13,6 +13,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
 import { CarouselModule as Test } from 'ngx-carousel-lib';
 import { CarouselModule as CarouselBoot } from 'ngx-bootstrap/carousel';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
 import { EstoqueComponent } from './estoque/estoque.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -57,7 +58,8 @@ import { FooterComponent } from './footer/footer.component';
       TabsModule.forRoot(),
       ToastrModule.forRoot(),
       Test,
-      CarouselBoot.forRoot()
+      CarouselBoot.forRoot(),
+      NgxNavbarModule
    ],
    providers: [],
    bootstrap: [

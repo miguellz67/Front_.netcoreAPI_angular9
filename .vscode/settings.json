@@ -15,6 +15,10 @@
         {
             "name": "feature/darkVersion",
             "base": "develop"
+        },
+        {
+            "name": "feature/pequenaRevisao",
+            "base": "develop"
         }
     ]
 }

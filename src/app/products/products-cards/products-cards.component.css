@@ -501,7 +501,7 @@ legend {
   width: 100%;
   padding: 10px 32px 10px 70px;
   font-size: 18px;
-  height: 70px;
+  height: 50px;
   color: #fff;
   background: linear-gradient(to right, #2c6dd570 0%, #2c6dd58f 28%, #ff4b5a94 91%, #ff31426c 100%);
   font-family: 'Lato', sans-serif;
@@ -509,19 +509,19 @@ legend {
 
 .s010 .antigoForm .inner-form .input-field input.placeholder {
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
 }
 
 .s010 .antigoForm .inner-form .input-field input:-moz-placeholder {
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
 }
 
 .s010 .antigoForm .inner-form .input-field input::-webkit-input-placeholder {
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
 }
 
