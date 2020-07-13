@@ -38,9 +38,8 @@
                 <td class="text-center">{{product.brand}}</td>
                 <td class="text-center">{{product.model}}</td>
                 <td class="text-center">{{product.amount}}</td>
-                <td class="text-center">{{product.price}}</td>
-                <td class="text-center"><img src="{{urlImg}}{{product.image}}" width="15%"
-                    alt="Imagem {{product.model}}"></td>
+                <td class="text-center">{{product.price | currency:'BRL':true:'1.2-2':'pt'}}</td>
+                <td class="text-center"><img src="{{urlImg}}{{product.image}}" width="45px" alt="Imagem {{product.model}}"></td>
                 <td class="text-center">
                   <button class="btn btn-sm btn-dark mr-1" tooltip="Editar" (click)="putProduct(template, product)"><i
                       class="fa fa-edit"></i></button>

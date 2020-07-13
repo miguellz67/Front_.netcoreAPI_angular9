@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   product: Product;
   categories: Category[];
   category: Category;
+  banners = [{url: 'assets/_banners/ban1.png', alt: 'a'}, {url: 'assets/_banners/ban2.png', alt: 'as'}];
+  
   public degree = 20;
   public moreSlides = 3;
 

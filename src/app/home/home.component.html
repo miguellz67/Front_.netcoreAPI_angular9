@@ -1,13 +1,6 @@
-<carousel [isAnimated]="true" [showIndicators]="false">
-  <slide class="carousel" *ngFor="let product of products">
-    <div  class="text-center py-5 text-black">
-      <img class="carousel mx-auto d-block img-fluid" src="{{urlImg}}{{product.image}}" alt="{{ product.name | titlecase }}"
-        style="display: block; width: 30%;">
-      <div class="lead">
-        <h3>{{product.categoryName}}</h3>
-        <p>{{ product.name | titlecase }}</p>
-      </div>
-    </div>
+ <carousel [isAnimated]="true" [showIndicators]="false">
+  <slide *ngFor="let img of banners;">
+        <img class="d-block w-100" src="{{img.url}}" alt="{{ img.alt | titlecase }}">
   </slide>
 </carousel> 
 
@@ -20,4 +13,4 @@
       </div>
     </div>
   </carousel-component>
-</div> 
+</div>  
