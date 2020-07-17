@@ -23,9 +23,9 @@ export class HomeComponent implements OnInit {
   product: Product;
   categories: Category[];
   category: Category;
-  banners = [{url: 'assets/_banners/ban1.png', alt: 'a'}, {url: 'assets/_banners/ban2.png', alt: 'as'}];
-  
-  public degree = 20;
+  banners = [{src: 'assets/_banners/ban1.png', alt: 'Minecraft RTX', link: 'https://www.nvidia.com/pt-br/geforce/campaigns/minecraft-with-rtx/'}, {src: 'assets/_banners/ban2.png', alt: 'NVIDIA RTX', link: 'https://www.nvidia.com/pt-br/geforce/games/'}];
+
+  public degree = 25;
   public moreSlides = 3;
 
   toggle() {
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   tes(){
-    this.topCarousel.slideTo(0);
+    setTimeout(() => { this.topCarousel.slideTo(0); }, 2000);
   }
   constructor(
     private productService: ProductService,

@@ -5,19 +5,7 @@
             "base": "develop"
         },
         {
-            "name": "feature/componentEstoqueFinal",
-            "base": "develop"
-        },
-        {
-            "name": "feature/componentEstoqueFinal",
-            "base": "develop"
-        },
-        {
-            "name": "feature/darkVersion",
-            "base": "develop"
-        },
-        {
-            "name": "feature/pequenaRevisao",
+            "name": "feature/revFinal",
             "base": "develop"
         }
     ]

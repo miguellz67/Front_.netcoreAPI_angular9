@@ -59,7 +59,8 @@ import { FooterComponent } from './footer/footer.component';
       ToastrModule.forRoot(),
       Test,
       CarouselBoot.forRoot(),
-      NgxNavbarModule
+      NgxNavbarModule,
+      AppRoutingModule
    ],
    providers: [],
    bootstrap: [
