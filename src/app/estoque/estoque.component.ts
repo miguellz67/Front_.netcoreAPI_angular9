@@ -17,19 +17,16 @@ import { ToastrService } from 'ngx-toastr';
 export class EstoqueComponent implements OnInit {
   urlImg = 'http://localhost:5000/images/';
   imageName: string;
-  products: Product[];
+  products: any = [];
   product: Product;
-  categories: Category[];
+  categories: any = [];
   category: Category;
   file: File;
+  public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
   // Put, Post ou Delete
   actionMode = '';
   // Category ou Product
   entTarget = '';
-
-
-  // tslint:disable-next-line: variable-name
-  _productFilter: string;
   categoryFilter: string;
   registerForm: FormGroup;
   registerCat: FormGroup;
@@ -37,14 +34,13 @@ export class EstoqueComponent implements OnInit {
 
   //Paginação
   _paginas = 4;
-  public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.  
   get paginas() {
     return this._paginas;
   }
   set paginas(value: number) {
     this._paginas = value;
   }
-
+  _productFilter: string;
   get productFilter(){
    return this._productFilter;
   }
@@ -67,7 +63,7 @@ export class EstoqueComponent implements OnInit {
 
   validation(){
     this.registerForm = this.fb.group({
-      name: ['', [Validators.minLength(15), Validators.maxLength(50), Validators.required]],
+      name: ['', [Validators.minLength(15), Validators.maxLength(60), Validators.required]],
       brand: ['', [Validators.minLength(2), Validators.required]],
       model: ['', [Validators.minLength(5), Validators.required]],
       description: ['', [Validators.minLength(15), Validators.required]],

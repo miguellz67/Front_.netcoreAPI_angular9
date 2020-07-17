@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/_models/Product';
 import { Category } from 'src/app/_models/Category';
 
 import { ProductService } from 'src/app/_services/product/product.service';
 import { CategoryService } from 'src/app/_services/category/category.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-footer',
@@ -16,7 +15,7 @@ export class FooterComponent implements OnInit {
   product: Product;
   categories: Category[];
   category: Category;
-  
+
   constructor(private productService: ProductService,
     private categoryService: CategoryService) { }
 
@@ -36,11 +35,6 @@ export class FooterComponent implements OnInit {
 
   getProducts() {
     return this.productService.getProducts().subscribe((products: Product[]) => {
-      products.forEach((pr, ind) => {
-        this.categoryService.getCategory(pr.categoryId).subscribe((cat) => {
-          products[ind].categoryName = cat.name;
-        });
-      });
       this.products = products;
       console.log(products);
     }, error => {

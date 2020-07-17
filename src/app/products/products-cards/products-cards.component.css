@@ -464,6 +464,16 @@ legend {
   -webkit-padding-end: 0;
 }
 
+#cardPr { transition: ease .5s; }
+
+#cardPr:hover {
+  border-color: brown !important;
+}
+
+#myClass {
+  border-color: brown !important;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -10,6 +10,16 @@
 
 thead>tr>th {
     cursor: pointer;
+    
+}
+
+td {
+    font-family:  Calibri;
+}
+
+@font-face{
+    font-family: asd;
+    src: url('/src/assets/_fonts/BebasNeue-Regular.ttf');
 }
 
 body {
@@ -17,17 +27,22 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+nav a {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #ffffffc9 !important;
+    transition: ease .5s;
+}
+
+nav a:hover {
+    color: #a70000c9 !important;
+}
 
 .fPer {
-    color: rgba(255, 0, 0, 0.432);
-    font-weight: bold;
-}
-
-h4 {
-    font-weight: lighter;
+    font-style: oblique !important;
+    color: #7272728e !important;
 }
 
 .my-pagination .ngx-pagination a {
@@ -48,7 +63,7 @@ h4 {
 }
  
 ::-webkit-scrollbar:horizontal {
-    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -81,6 +96,7 @@ input::placeholder, label {
 
 .btn-danger {
     background: rgba(255, 0, 0, 0.349) !important;
+    color: rgb(196, 196, 196);
 }
 
 .btn-primary {
@@ -117,5 +133,18 @@ input::placeholder, label {
 /* Guias estoque*/
 
 .nav-link span {
-    color: #ff0000c7 !important;
+    color: #e4e4e4 !important;
+}
+
+#test .nav-link {
+    background-color: rgba(255, 0, 0, 0.247) !important;
+    transition: ease .5s;
+}
+
+#test .nav-link:hover {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+#test .nav-link.active {
+    background-color: rgba(255, 0, 0, 0.5) !important;
 }

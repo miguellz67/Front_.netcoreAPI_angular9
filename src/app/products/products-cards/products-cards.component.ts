@@ -14,9 +14,9 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class ProductsCardsComponent implements OnInit {
   urlImg = 'http://localhost:5000/images/';
   imagemName: string;
-  products: Product[];
+  products: any = [];
   product: Product;
-  categories: Category[];
+  categories: any = [];
   category: Category;
   public paginaAtual = 1; // Dizemos que queremos que o componente quando carregar, inicialize na página 1.
 
@@ -63,7 +63,7 @@ export class ProductsCardsComponent implements OnInit {
   openModalWithClass(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
-      Object.assign({}, { class: 'gray modal-lg' })
+      Object.assign({}, { class: 'gray modal-md' })
     );
   }
 

@@ -1,5 +1,5 @@
 <div class="container main-container">
-    <div class="s010">
+    <div class="s010 mt-2">
         <div class="antigoForm">
             <!-- Basic -->
             <div class="inner-form">
@@ -19,13 +19,13 @@
             </div>
         </div>
     </div>
-    <div class="row text-center">
+    <div class="row text-center mt-3">
         <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
             class="col-lg-3" style="padding-bottom: 30px;">
-            <div class="card text-white bg-dark h-100 "
+            <div id="cardPr" class="card text-white bg-dark h-100"
                 style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important;">
                 <div class="card-header">
-                    <h5 class="preco">{{product.brand}}</h5>
+                    <h5 class="fPer">{{product.brand}}</h5>
                 </div>
                 <br>
                 <a class="text-decoration-none">
@@ -34,7 +34,7 @@
                     </div>
                 </a>
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name | titlecase }}</h5>
+                    <h6 class="card-title">{{ product.name | titlecase }}</h6>
                     <p>Por apenas:</p>
                     <div>
                         <h5>{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h5>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <!-- modal -->
-            <ng-template #template class="myClass">
+            <ng-template #template id="myClass" style="border-color: brown;">
                 <div class="modal-header">
                     <h4 class="modal-title pull-left">{{ product.name | titlecase }}</h4>
                     <br>
@@ -53,7 +53,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="card mb-3">
+                <div class="card mb-3 p-3">
                     <img class="card-img-top" src="{{urlImg}}{{product.image}}" alt="{{ product.name | titlecase }}">
                     <br>
                     <div class="container-fluid">
