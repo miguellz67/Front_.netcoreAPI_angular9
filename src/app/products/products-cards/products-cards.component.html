@@ -1,28 +1,51 @@
 <div class="container main-container">
-
-    <div class="row text-center">
-
-        <div *ngFor="let product of products" class="col-md-4" style="padding-bottom: 30px;">
-
-            <div class="card h-100">
+    <div class="s010 mt-2">
+        <div class="antigoForm">
+            <!-- Basic -->
+            <div class="inner-form">
+                <div class="basic-search">
+                    <div class="input-field">
+                        <input id="search" type="text" placeholder="Pesquisar"
+                            class="form-control border-secondary form-control-sm" [(ngModel)]='listFilter'>
+                        <div class="icon-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 -3 17 30">
+                                <path
+                                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center mt-3">
+        <div *ngFor="let product of products | filter: listFilter | paginate: { itemsPerPage: paginas, currentPage: paginaAtual }; let i = index"
+            class="col-lg-3" style="padding-bottom: 30px;">
+            <div id="cardPr" class="card text-white bg-dark h-100"
+                style="background: linear-gradient(45deg, #00000062 10%, #ffffff3f 90%) !important;">
+                <div class="card-header">
+                    <h5 class="fPer">{{product.brand}}</h5>
+                </div>
+                <br>
                 <a class="text-decoration-none">
                     <div style="align-content:center;">
-                        <img src="/assets/{{product.image}}" height="120px" width="150px" alt="">
+                        <img src="{{urlImg}}{{product.image}}" height="150px" width="150px" alt="">
                     </div>
                 </a>
                 <div class="card-body">
-                    <h4 class="card-title">{{ product.name | titlecase }}</h4>
+                    <h6 class="card-title">{{ product.name | titlecase }}</h6>
                     <p>Por apenas:</p>
                     <div>
-                        <h4>{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h4>
+                        <h5>{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h5>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-primary" (click)="openModal(template)">Detalhes</button>
+                    <button type="button" class="btn btn-danger" (click)="openModalWithClass(template)">Detalhes</button>
                 </div>
             </div>
-
-            <ng-template #template>
+            <!-- modal -->
+            <ng-template #template id="myClass" style="border-color: brown;">
                 <div class="modal-header">
                     <h4 class="modal-title pull-left">{{ product.name | titlecase }}</h4>
                     <br>
@@ -30,8 +53,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="card mb-3">
-                    <img class="card-img-top" src="/assets/{{product.image}}" alt="{{ product.name | titlecase }}">
+                <div class="card mb-3 p-3">
+                    <img class="card-img-top" src="{{urlImg}}{{product.image}}" alt="{{ product.name | titlecase }}">
                     <br>
                     <div class="container-fluid">
                         <div class="row">
@@ -43,7 +66,7 @@
                             <div class="col-md-4 ml-auto">
                                 <h6>Por apenas:</h6>
                                 <div>
-                                    <h4 class="preco">{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h4>
+                                    <h4>{{ product.price | currency:'BRL':true:'1.2-2':'pt' }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -61,14 +84,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <h5>Categoria</h5>
-                                <p class="card-text">Abcdefg</p>
+                                <p class="card-text">{{product.categoryName}}</p>
                                 <br>
                             </div>
                         </div>
                         <div>
                             <h5>Descrição</h5>
-                                <p class="card-text">{{ product.description }}</p>
-                                <br>
+                            <p class="card-text">{{ product.description }}</p>
+                            <br>
                         </div>
                     </div>
                     <button type="button" class="btn btn-danger" aria-label="Close" (click)="modalRef.hide()">
@@ -76,7 +99,21 @@
                     </button>
                 </div>
             </ng-template>
-
+            <!-- fim-modal -->
         </div>
     </div>
+</div>
+<div class="pagination justify-content-center pagination-large mb-3">
+    <div>
+        <select #select class="form-control" id="typeConge" name="typeConge" [(ngModel)]="paginas">
+            <option type="number" [ngValue]="4" selected>Produtos por página</option>
+            <option type="number" [ngValue]="4">4</option>
+            <option type="number" [ngValue]="8">8</option>
+            <option type="number" [ngValue]="16">16</option>
+            <option type="number" [ngValue]="products.length">Todos</option>
+        </select>
+    </div>
+    <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+        nextLabel="Próximo">
+    </pagination-controls>
 </div>

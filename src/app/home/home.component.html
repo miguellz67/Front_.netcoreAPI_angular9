@@ -1,1 +1,18 @@
-<p>home works!</p>
+ <carousel [isAnimated]="true" [showIndicators]="false">
+  <slide *ngFor="let img of banners;">
+        <a target="_blank" href="{{img.link}}">
+          <img class="d-block w-100" src="{{img.src}}" alt="{{ img.alt | titlecase }}">
+        </a>
+  </slide>
+</carousel> 
+
+ <div class="container mt-5 mb-4 bg-light" id="catCarousel" *ngFor="let category of categories">
+  <h6 class="text-left fPer">{{category.name.toUpperCase()}}</h6>
+  <carousel-component [mode]="'horizontal'" [morePairSlides]="moreSlides" [angle]="degree" [timeToSlide]="1000" (onReachEnd)="topCarousel.slideTo(0)" [autoPlay]="true" #topCarousel>
+    <div><h1 class="text-danger">{{category.name}}</h1></div>
+    <div class="item-carousel" *ngFor="let product of productByCategory(category)" >
+      <div style="background-image: url({{urlImg}}{{product.image}});">
+      </div>
+    </div>
+  </carousel-component>
+</div>  

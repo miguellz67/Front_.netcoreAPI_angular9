@@ -1,7 +1,150 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import '../node_modules/ngx-toastr/toastr';
 
 .preco {
-    color: green !important;
+    color: rgb(5, 0, 0) !important;
+}
+
+thead>tr>th {
+    cursor: pointer;
+    
+}
+
+td {
+    font-family:  Calibri;
+}
+
+@font-face{
+    font-family: asd;
+    src: url('/src/assets/_fonts/BebasNeue-Regular.ttf');
+}
+
+body {
+    background-image: url('../src/assets/dut.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+nav a {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #ffffffc9 !important;
+    transition: ease .5s;
+}
+
+nav a:hover {
+    color: #a70000c9 !important;
+}
+
+.fPer {
+    font-style: oblique !important;
+    color: #7272728e !important;
+}
+
+.my-pagination .ngx-pagination a {
+    background: #ffffff77;
+}
+
+.my-pagination .ngx-pagination span {
+    color: #ffffff;
+}
+
+.my-pagination .ngx-pagination .current {
+    background: #ff00009d;
+}
+
+/*Scroll*/
+::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+::-webkit-scrollbar:horizontal {
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); 
+    background-color: rgb(204, 30, 30);
+}
+/* modal */
+
+input, textarea, select, option {
+    background: rgba(128, 128, 128, 0.226) !important;
+    border: none !important;
+    color: #FFF !important;
+}
+
+option {
+    background-color: rgba(0, 0, 0, 0.603) !important;
+}
+
+input::placeholder, label {
+    color: #FFF !important;
+}
+
+.btn-danger {
+    background: rgba(255, 0, 0, 0.349) !important;
+    color: rgb(196, 196, 196);
+}
+
+.btn-primary {
+    background: rgba(0, 4, 255, 0.349) !important;
+}
+
+.modal-content {
+    background: linear-gradient(45deg, #000000a9 10%, #3331317e 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.modal-header {
+    background: linear-gradient(45deg, #000000d7 10%, #3331313f 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.card.mb-3 {
+    background: linear-gradient(45deg, #000000d7 10%, #3331313f 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.jumbotron {
+    background: linear-gradient(45deg, #000000d7 10%, #3331313f 90%) !important;
+    color: rgba(255, 255, 255, 0.733) !important;
+}
+
+.close {
+    color: #FFF !important;
+    font-size: 28px !important;
+}
+
+/* fim modal */
+
+/* Guias estoque*/
+
+.nav-link span {
+    color: #e4e4e4 !important;
+}
+
+#test .nav-link {
+    background-color: rgba(255, 0, 0, 0.247) !important;
+    transition: ease .5s;
+}
+
+#test .nav-link:hover {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+#test .nav-link.active {
+    background-color: rgba(255, 0, 0, 0.5) !important;
 }
